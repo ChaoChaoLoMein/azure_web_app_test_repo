@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Web App GitHub Integration Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            color: #0078d4;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .status {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .info-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #106ebe;
+        }
+        #apiResponse {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Azure Web App GitHub Integration Test</h1>
+            <p>Testing deployment from GitHub repository to Azure Web App</p>
+        </div>
+
+        <div class="status">
+            ✅ Application successfully deployed and running!
+        </div>
+
+        <div class="info-section">
+            <h3>Test Features:</h3>
+            <ul>
+                <li>✅ Express.js web server</li>
+                <li>✅ Static file serving</li>
+                <li>✅ Health check endpoint</li>
+                <li>✅ RESTful API endpoint</li>
+                <li>✅ Environment configuration</li>
+            </ul>
+        </div>
+
+        <div class="info-section">
+            <h3>API Endpoints:</h3>
+            <button onclick="testHealthCheck()">Test Health Check (/health)</button>
+            <button onclick="testApiInfo()">Test API Info (/api/info)</button>
+            <div id="apiResponse"></div>
+        </div>
+
+        <div class="info-section">
+            <h3>Deployment Information:</h3>
+            <p><strong>Repository:</strong> ChaoChaoLoMein/azure_web_app_test_repo</p>
+            <p><strong>Deployment Method:</strong> GitHub Integration</p>
+            <p><strong>Runtime:</strong> Node.js</p>
+            <p><strong>Framework:</strong> Express.js</p>
+            <p id="timestamp"></p>
+        </div>
+    </div>
+
+    <script>
+        // Display current timestamp
+        document.getElementById('timestamp').innerHTML = 
+            '<strong>Page loaded:</strong> ' + new Date().toLocaleString();
+
+        async function testHealthCheck() {
+            try {
+                const response = await fetch('/health');
+                const data = await response.json();
+                document.getElementById('apiResponse').textContent = 
+                    'Health Check Response:\n' + JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('apiResponse').textContent = 
+                    'Error: ' + error.message;
+            }
+        }
+
+        async function testApiInfo() {
+            try {
+                const response = await fetch('/api/info');
+                const data = await response.json();
+                document.getElementById('apiResponse').textContent = 
+                    'API Info Response:\n' + JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('apiResponse').textContent = 
+                    'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
